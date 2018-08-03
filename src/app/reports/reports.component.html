@@ -1,0 +1,22 @@
+<div class="ui-g">
+
+  <div class="ui-g-12 ui-lg-4">
+    <label>
+      <span class="ui-g-12 ui-md-4 ui-lg-3">Start date</span>
+      <p-calendar (onSelect)="setStartDate()" class="ui-g-12 ui-md-8 ui-lg-5" [(ngModel)]="startDate" dateFormat="dd.mm.yy."></p-calendar>
+    </label>
+  </div>
+
+  <div class="ui-g-12 ui-lg-4">
+    <label>
+      <span class="ui-g-12 ui-md-4 ui-lg-3">End date</span>
+      <p-calendar (onSelect)="setEndDate()" class="ui-g-12 ui-md-8 ui-lg-5" [(ngModel)]="endDate" dateFormat="dd.mm.yy."></p-calendar>
+    </label>
+  </div>
+  
+</div>
+
+<p-tabMenu [model]="items"></p-tabMenu>
+
+
+<router-outlet></router-outlet>
