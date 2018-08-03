@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-work-hours',
+  selector: 'work-hours',
   templateUrl: './work-hours.component.html',
   styleUrls: ['./work-hours.component.scss']
 })

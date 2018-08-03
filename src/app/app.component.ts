@@ -9,6 +9,9 @@ import {MenuItem} from 'primeng/api';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  title = 'Work time Manager';
+
   items: MenuItem[];
 
   ngOnInit() {

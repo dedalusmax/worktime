@@ -4,8 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {TabMenuModule} from 'primeng/tabmenu';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
+// import { Projects } from './work-hours/projects';
 
 @NgModule({
   declarations: [
@@ -14,7 +18,10 @@ import {TabMenuModule} from 'primeng/tabmenu';
   imports: [
     BrowserModule,
     AppRoutingModule, 
-    TabMenuModule
+    TabMenuModule,
+    BrowserAnimationsModule,
+    InputTextModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

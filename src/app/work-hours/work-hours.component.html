@@ -1,3 +1,33 @@
-<p>
-  work-hours works!
-</p>
+<div class="ui-g">
+
+  <div class="ui-g-12 ui-lg-12">
+      <span class="ui-g-12 ui-md-2 ui-lg-1">Date:</span>
+      <p-calendar class="ui-g-12 ui-md-8 ui-lg-5" [(ngModel)]="date" dateFormat="dd.mm.yy" showButtonBar="true" required></p-calendar> 
+  </div>
+
+  <div class="ui-g-12 ui-lg-12">
+      <span class="ui-g-12 ui-md-2 ui-lg-1">Start time:</span>
+      <input type="time" [(ngModel)]="startTime" required/>
+  </div>
+
+  <div class="ui-g-12 ui-lg-12">
+      <span class="ui-g-12 ui-md-2 ui-lg-1">End time:</span>
+      <input type="time" [(ngModel)]="endTime" required/>
+  </div>
+
+  <div class="ui-g-12 ui-lg-12">
+      <span class="ui-g-12 ui-md-2 ui-lg-1">Choose project:</span>
+        <p-dropdown [options]="projects" [(ngModel)]="selectedProject" required></p-dropdown>
+
+  </div>
+
+  <div class="ui-g-12 ui-lg-12">
+      <span class="ui-g-12 ui-md-2 ui-lg-1" >Comments:</span>
+      <input type="text" pInputText [(ngModel)]="comments"/>
+  </div>
+
+  <div class="ui-g-12 ui-lg-12">
+    <span class="ui-g-12 ui-md-2 ui-lg-1" ></span>
+    <button pButton type="button" label="Save" ></button>
+  </div>
+</div>
