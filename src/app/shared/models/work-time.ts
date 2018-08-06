@@ -1,7 +1,7 @@
 export class WorkTime {
     id: number;
     userId: string;
-    workdate: Date;
+    workDate: Date;
     startTime: Date;
     endTime: Date;
 }

@@ -22,7 +22,7 @@ export class WorkTimeService extends HttpBaseService<WorkTime>{
     return this.http.get<WorkTime[]>(this.workDaysUrl).pipe(map(
       workTimes => {
         return workTimes.filter(workTime => {          
-          const time = new Date(workTime.workdate).getTime(); // TODO: servis treba vracati Date, ne string
+          const time = new Date(workTime.workDate).getTime(); // TODO: servis treba vracati Date, ne string
           return time < endDate.getTime() && time > startDate.getTime()
         })
       }
