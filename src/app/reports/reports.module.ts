@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { TabMenuModule } from 'primeng/tabmenu';
 import { CalendarModule } from 'primeng/calendar';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 import { TimeIntervalService } from './time-interval.service';
 
@@ -18,6 +20,8 @@ import { ReportsComponent } from './reports.component';
     FormsModule,
     TabMenuModule,
     CalendarModule,
+    TableModule,
+    ButtonModule,
     ReportingRoutingModule
   ],
   declarations: [

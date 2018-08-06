@@ -1,3 +1,23 @@
 <p>
   Daily reports from {{startDate | date}} to {{endDate | date}}.
+  <p-button label="Download CSV" (onClick)=downloadData() icon="pi pi-download"></p-button>
 </p>
+
+<p-table [value]="workDays">
+  <ng-template pTemplate="header">
+      <tr>
+        <th>Date</th>
+        <th>Start time</th>
+        <th>End time</th>
+        <th>Project</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-workDay>
+      <tr>
+        <td>{{workDay.date | date}}</td>
+        <td>{{workDay.startTime}}</td>
+        <td>{{workDay.endTime}}</td>
+        <td>{{workDay.projectId}}</td>
+      </tr>
+  </ng-template>
+</p-table>
