@@ -11,7 +11,7 @@ export abstract class HttpBaseService<T>{
 
     private url : string;
 
-    constructor(private http: HttpClient, url: string) {
+    constructor(protected http: HttpClient, url: string) {
         this.url = url;
      }
   
@@ -30,7 +30,7 @@ export abstract class HttpBaseService<T>{
       }
 
 
-    private handleError<U> (operation = 'operation', result?: U) {
+    protected handleError<U> (operation = 'operation', result?: U) {
         return (error: any): Observable<U> => {
     
         console.error(error);

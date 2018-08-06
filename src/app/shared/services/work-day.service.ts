@@ -5,39 +5,23 @@ import { WorkDay } from '../models/work-day';
 
 import { catchError, map, filter } from 'rxjs/operators';
 import { start } from 'repl';
+import { HttpBaseService } from './http-base.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable({
   providedIn: 'root'
 })
-export class WorkDayService {
+export class WorkDayService extends HttpBaseService<WorkDay>{
 
-  constructor(private http: HttpClient) { }
+  constructor(http: HttpClient) { 
+    super(http, "api/workDays");
+  }
 
   private workDaysUrl = 'api/workDays';
 
-  getWorkDay(startDate: Date, endDate: Date): Observable<WorkDay> {
+  getWorkDaysByDate(startDate: Date, endDate: Date): Observable<WorkDay> {
     return this.http.get<WorkDay>(this.workDaysUrl).pipe(filter(workDay => workDay.date.getTime < endDate.getTime && workDay.date.getTime > startDate.getTime),
-      catchError(this.handleError<WorkDay>(`getWorkDays`))
-    );
-  }
-
-  addWorkDay(workDay : WorkDay): Observable<WorkDay> {
-    return this.http.post<WorkDay>(this.workDaysUrl, workDay, httpOptions).pipe(
-      catchError(this.handleError<WorkDay>('addHero'))
-    );
-  }
-
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-   
-      console.error(error);
-   
-      return of(result as T);
-    };
+      catchError(this.handleError<WorkDay>(`getWorkDays`)));
   }
 
 }
