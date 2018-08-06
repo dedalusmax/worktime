@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { WorkDay } from '../models/work-day';
-import 'rxjs/add/operator/map';
 
 import { catchError, filter, map } from 'rxjs/operators';
 import { HttpBaseService } from './http-base.service';
