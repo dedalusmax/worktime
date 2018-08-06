@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { WorkDay } from '../models/work-day';
+import 'rxjs/add/operator/map';
 
-import { catchError, map, filter } from 'rxjs/operators';
-import { start } from 'repl';
+import { catchError, filter, map } from 'rxjs/operators';
 import { HttpBaseService } from './http-base.service';
 
 
@@ -19,9 +19,9 @@ export class WorkDayService extends HttpBaseService<WorkDay>{
 
   private workDaysUrl = 'api/workDays';
 
-  getWorkDaysByDate(startDate: Date, endDate: Date): Observable<WorkDay> {
-    return this.http.get<WorkDay>(this.workDaysUrl).pipe(filter(workDay => workDay.date.getTime < endDate.getTime && workDay.date.getTime > startDate.getTime),
-      catchError(this.handleError<WorkDay>(`getWorkDays`)));
+  getWorkDaysByDate(startDate: Date, endDate: Date): Observable<WorkDay[]> {
+    return this.http.get<WorkDay[]>(this.workDaysUrl).pipe(map(workDays => workDays.filter(workDay => workDay.date.getTime < endDate.getTime && workDay.date.getTime > startDate.getTime)),
+      catchError(this.handleError<WorkDay[]>(`getWorkDays`)));
   }
-
+  
 }
