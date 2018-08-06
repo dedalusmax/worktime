@@ -1,6 +1,6 @@
 <p>
-  projects-reports works!
+    Work projects records from {{startDate | date:'dd.LL.yyyy.'}} to {{endDate | date:'dd.LL.yyyy.'}}
+    <p-button label="Download CSV" (onClick)=downloadData() icon="pi pi-download"></p-button>
 </p>
-{{startDate}}
-<br>
-{{endDate}}
+
+<p-chart type="pie" [data]="chartData"></p-chart>
