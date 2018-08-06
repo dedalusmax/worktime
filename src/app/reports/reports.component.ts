@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 
-import {TimeIntervalService} from './time-interval.service';
-import { _localeFactory } from '../../../node_modules/@angular/core/src/application_module';
+import { TimeIntervalService } from './time-interval.service';
 
 @Component({
   selector: 'app-reports',
@@ -12,7 +11,7 @@ import { _localeFactory } from '../../../node_modules/@angular/core/src/applicat
 })
 export class ReportsComponent implements OnInit {
 
-  items: MenuItem[];
+  items: MenuItem[] =[];
 
   startDate: Date;
   endDate: Date;
@@ -36,13 +35,10 @@ export class ReportsComponent implements OnInit {
 
   setEndDate() {
     this.timeIntervalService.sendEndDate(this.endDate);
-    console.log("end " + this.endDate);
   }
 
   setStartDate() {
-    this.timeIntervalService.sendStartDate(this.startDate);
-    console.log("start " + this.startDate);
-    
+    this.timeIntervalService.sendStartDate(this.startDate);   
   }
 
 }

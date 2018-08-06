@@ -1,24 +1,20 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject  } from 'rxjs';
+import { ReplaySubject, BehaviorSubject  } from 'rxjs';
 
 @Injectable()
 export class TimeIntervalService {
-  endDateSource = new ReplaySubject <Date>(1);
-  startDateSource = new ReplaySubject <Date>(1);
+  endDateSource: BehaviorSubject <Date>;
+  startDateSource: BehaviorSubject <Date>;
 
   constructor() {
-    this.initTime();
-  }
-
-  initTime() {
     let endDate = new Date(Date.now());
     endDate.setHours(0,0,0,0);
     
     let startDate = new Date(endDate);
     startDate.setMonth(startDate.getUTCMonth(), 1);
 
-    this.sendStartDate(startDate);
-    this.sendEndDate(endDate);
+    this.startDateSource = new BehaviorSubject<Date>(startDate);
+    this.endDateSource = new BehaviorSubject<Date>(endDate);
   }
 
   sendStartDate(startDate: Date): void {

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TimeIntervalService } from '../time-interval.service'
+import { WorkDayService } from '../../shared/services/work-day.service';
+import { WorkDay } from '../../shared/models/work-day';
+
+import { TimeIntervalService } from '../time-interval.service';
 
 @Component({
   selector: 'app-daily-reports',
@@ -9,19 +12,43 @@ import { TimeIntervalService } from '../time-interval.service'
 })
 export class DailyReportsComponent implements OnInit {
 
-  startDate: Date;
-  endDate: Date;
+  startDate: Date = null;
+  endDate: Date = null;
 
-  constructor(private timeIntervalService: TimeIntervalService) { }
+  workDays: WorkDay[] = [];
+
+  constructor(
+    private timeIntervalService: TimeIntervalService, 
+    private workDaysService: WorkDayService
+  ) { }
 
   ngOnInit() {
     this.timeIntervalService.endDateSource.subscribe(
-      (endDate: Date) => this.endDate = endDate
+      (endDate: Date) => {
+        this.endDate = endDate;
+        this.loadWorkDays();
+      }
     );
 
     this.timeIntervalService.startDateSource.subscribe(
-      (startDate: Date) => this.startDate = startDate
+      (startDate: Date) => {
+        this.startDate = startDate;
+        this.loadWorkDays();
+      }
     );
   }
 
+  loadWorkDays(): void {
+    if (this.startDate && this.endDate) {
+      this.workDaysService.getWorkDaysByDate(this.startDate, this.endDate)
+        .subscribe(
+          workDays => this.workDays = workDays);
+    }
+  }
+
+  downloadData(): void {
+
+  }
+
 }
+
