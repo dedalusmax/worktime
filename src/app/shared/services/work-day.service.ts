@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from '../../node_modules/rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { WorkDay } from './work-day';
+import { WorkDay } from '../models/work-day';
 
-import { catchError, map } from '../../node_modules/rxjs/operators';
+import { catchError, map, filter } from 'rxjs/operators';
+import { start } from 'repl';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,7 +20,7 @@ export class WorkDayService {
   private workDaysUrl = 'api/workDays';
 
   getWorkDay(startDate: Date, endDate: Date): Observable<WorkDay> {
-    return this.http.get<WorkDay>(this.workDaysUrl).pipe(
+    return this.http.get<WorkDay>(this.workDaysUrl).pipe(filter(workDay => workDay.date.getTime < endDate.getTime && workDay.date.getTime > startDate.getTime),
       catchError(this.handleError<WorkDay>(`getWorkDays`))
     );
   }
