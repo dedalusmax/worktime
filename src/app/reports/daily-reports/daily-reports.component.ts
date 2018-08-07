@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-import { WorkRecord } from '../../shared/models/work-record';
-
+import { ReportService } from '../../shared/services/report.service'
 import { TimeIntervalService } from '../time-interval.service';
+
+import { combineLatest } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-daily-reports',
@@ -14,102 +16,33 @@ export class DailyReportsComponent implements OnInit {
   startDate: Date = null;
   endDate: Date = null;
 
-  workRecords: WorkRecord[] = [{
-    recordId: 1,
-    userId: "string",
-    projectId: 12,
-    workDate: new Date(2018,8,2,0,0,0),
-    hours: 2,
-    comment: "imam",
-    fieldWork: false,
-    businessTrip: false
-},
-{
-    recordId: 1,
-    userId: "string",
-    projectId: 12,
-    workDate: new Date(2018,8,3,0,0,0),
-    hours: 2,
-    comment: "imam",
-    fieldWork: false,
-    businessTrip: false
-},
-{
-    recordId: 1,
-    userId: "string",
-    projectId: 12,
-    workDate: new Date(2018,8,3,0,0,0),
-    hours: 2,
-    comment: "imam",
-    fieldWork: false,
-    businessTrip: false
-},
-{
-    recordId: 1,
-    userId: "string",
-    projectId: 12,
-    workDate: new Date(2018,8,5,0,0,0),
-    hours: 2,
-    comment: "imam",
-    fieldWork: false,
-    businessTrip: false
-},
-{
-  recordId: 2,
-  userId: "string",
-  projectId: 13,
-  workDate: new Date(2018,8,5,0,0,0),
-  hours: 6,
-  comment: "nemam",
-  fieldWork: false,
-  businessTrip: false
-},
-{
-  recordId: 2,
-  userId: "string",
-  projectId: 19,
-  workDate: new Date(2018,8,5,0,0,0),
-  hours: 1,
-  comment: "nkdakdaskdd",
-  fieldWork: false,
-  businessTrip: false
-},
-{
-  recordId: 3,
-  userId: "string",
-  projectId: 13,
-  workDate: new Date(2018,8,6,0,0,0),
-  hours: 8,
-  comment: "nemam",
-  fieldWork: false,
-  businessTrip: true
-}];
+  dailyRecords:any;
 
-  rowGroupMetadata = [];
+  //rowGroupMetadata = [];
 
 
   constructor(
-    private timeIntervalService: TimeIntervalService
+    private timeIntervalService: TimeIntervalService,
+    private reportService: ReportService 
   ) { }
 
   ngOnInit() {
-    this.timeIntervalService.endDateSource.subscribe(
-      (endDate: Date) => {
-        this.endDate = endDate;
-        this.loadWorkDays();
-      }
-    );
-
-    this.timeIntervalService.startDateSource.subscribe(
-      (startDate: Date) => {
+    combineLatest(
+      this.timeIntervalService.startDateSource,
+      this.timeIntervalService.endDateSource
+    ).pipe(
+      switchMap(([startDate, endDate]) => {
         this.startDate = startDate;
-        this.loadWorkDays();
-      }
-    );
-
-    this.updateRowGroupMetaData();
+        this.endDate = endDate;
+        return this.reportService.getWorkRecordsInPeriod(startDate, endDate);
+      })
+    ).subscribe(data => this.dailyRecords = data);
   }
 
+  /*
+  let-rowIndex="rowIndex"
+  *ngIf="rowGroupMetadata[rowIndex] != 0" [attr.rowspan]="rowGroupMetadata[rowIndex]"
+  
   updateRowGroupMetaData() {
     this.rowGroupMetadata = [];
     if (!this.workRecords || this.workRecords.length == 0)
@@ -131,16 +64,17 @@ export class DailyReportsComponent implements OnInit {
         }
       }
     }
-  }
+  }*/
 
   loadWorkDays(): void {
     if (this.startDate && this.endDate) {
       //TODO
+      //this.updateRowGroupMetaData();
     }
   }
 
   downloadData(): void {
-    //TODO
+    //TODO  
   }
 
 }

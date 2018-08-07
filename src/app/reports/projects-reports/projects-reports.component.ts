@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ReportService } from '../../shared/services/report.service'
 import { TimeIntervalService } from '../time-interval.service';
 
-import { WorkRecord } from '../../shared/models/work-record';
+import { combineLatest } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 
 // TODO brisati
-const workRecords: WorkRecord[] = 
+const workRecords: any = 
 [
   {
     recordId: 1,
@@ -83,60 +84,52 @@ const workRecords: WorkRecord[] =
 })
 export class ProjectsReportsComponent implements OnInit {
 
-  chartData: any;
+  projectRecords: any;
+
+  chartData = {
+    labels: ['Projekt A','Projekt B','Projekt C'],
+    datasets: [
+        {
+            data: [48, 4, 12],
+            backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ]
+        }]    
+  };
+
   tableData: any;
-
-  constructor(private timeIntervalService: TimeIntervalService) { 
-    this.chartData = {
-      labels: ['Projekt A','Projekt B','Projekt C'],
-      datasets: [
-          {
-              data: [48, 4, 12],
-              backgroundColor: [
-                  "#FF6384",
-                  "#36A2EB",
-                  "#FFCE56"
-              ],
-              hoverBackgroundColor: [
-                  "#FF6384",
-                  "#36A2EB",
-                  "#FFCE56"
-              ]
-          }]    
-      };
-  }
-
+  
   startDate: Date;
   endDate: Date;
 
+  constructor(
+    private timeIntervalService: TimeIntervalService,
+    private reportService: ReportService 
+  ) { }
+
   ngOnInit() {
-    this.timeIntervalService.endDateSource.subscribe(
-      (endDate: Date) => this.endDate = endDate
-    );
-
-    this.timeIntervalService.startDateSource.subscribe(
-      (startDate: Date) => this.startDate = startDate
-    );
-
-    this.computeData(workRecords);
+    combineLatest(
+      this.timeIntervalService.startDateSource,
+      this.timeIntervalService.endDateSource
+    ).pipe(
+      switchMap(([startDate, endDate]) => {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        return this.reportService.getWorkRecordsInPeriod(startDate, endDate);
+      })
+    ).subscribe(data => this.projectRecords = data);
   }
 
-  computeData(workRecords: WorkRecord[]) {
+
+  downloadData(): void {
     //TODO
-    const reducedData = workRecords.reduce<any>((state, workRecord) => {
-      if( state[workRecord.projectId] ) {
-        state[workRecord.projectId].hours += workRecord.hours;
-      } else {
-        state[workRecord.projectId].hours = workRecord.hours;
-      }
-    }, {});
-
-    console.log(reducedData);
-    
-  }
-
-  download() {
-    // TODO
   }
 
 }
