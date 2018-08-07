@@ -6,6 +6,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { ChartModule } from 'primeng/chart';
 
 import { TimeIntervalService } from './time-interval.service';
 
@@ -22,6 +23,7 @@ import { ReportsComponent } from './reports.component';
     CalendarModule,
     TableModule,
     ButtonModule,
+    ChartModule,
     ReportingRoutingModule
   ],
   declarations: [

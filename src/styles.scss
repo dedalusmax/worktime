@@ -1,5 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
-
 * {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration-line: none;
+    color: #1e73ce;
+
+    &:visited {
+        color: #1e73ce;
+    }
+
+    &:hover {
+        color: #2d65a1;
+        text-decoration: underline;
+    }
 }
