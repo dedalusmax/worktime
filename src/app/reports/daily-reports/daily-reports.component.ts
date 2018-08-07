@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { WorkDayService } from '../../shared/services/work-day.service';
 import { WorkRecord } from '../../shared/models/work-record';
 
 import { TimeIntervalService } from '../time-interval.service';
@@ -86,8 +85,7 @@ export class DailyReportsComponent implements OnInit {
 
 
   constructor(
-    private timeIntervalService: TimeIntervalService, 
-    private workDaysService: WorkDayService
+    private timeIntervalService: TimeIntervalService
   ) { }
 
   ngOnInit() {

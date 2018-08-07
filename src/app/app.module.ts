@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 
 import { TabMenuModule } from 'primeng/tabmenu';
 import { InMemoryDataService } from './shared/services/in-memory-data.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
@@ -26,7 +25,7 @@ import { ButtonModule } from 'primeng/button';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
     BrowserAnimationsModule,
     InputTextModule,
     ButtonModule
