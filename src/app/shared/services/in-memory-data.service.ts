@@ -31,7 +31,14 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 4, userId: "7d63e0fb-e979-496b-b0c5-4c0035dcdfdb", workDate: new Date(2018, 1, 25), startTime: new Date(2018, 1, 22, 8), endTime: new Date(2018, 1, 22, 16)},
       {id: 5, userId: "7d63e0fb-e979-496b-b0c5-4c0035dcdfdb", workDate: new Date(2018, 1, 26), startTime: new Date(2018, 1, 22, 8), endTime: new Date(2018, 1, 22, 16)},
       {id: 6, userId: "7d63e0fb-e979-496b-b0c5-4c0035dcdfdb", workDate: new Date(2018, 1, 27), startTime: new Date(2018, 1, 22, 7), endTime: new Date(2018, 1, 22, 15)}
-    ]
-    return { workDays, workRecords, workTimes};
+    ];
+
+    const projects = [
+      {id : 1, name: "Bankart"},
+      {id : 2, name: "BizDataX"},
+      {id : 3, name: "Bolovanje"},
+      {id : 4, name: "DevArena"}
+    ];
+    return { workDays, workRecords, workTimes, projects};
   }
 }

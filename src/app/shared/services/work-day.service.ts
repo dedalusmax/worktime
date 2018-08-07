@@ -28,6 +28,6 @@ export class WorkDayService extends HttpBaseService<WorkDay>{
       }
     ),
       catchError(this.handleError<WorkDay[]>(`getWorkDays`)));
-  }
+  };
   
 }

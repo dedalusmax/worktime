@@ -9,7 +9,7 @@ import { HttpBaseService } from './http-base.service';
 export class ProjectsService extends HttpBaseService<Project> {
 
   constructor(http: HttpClient) { 
-    super(http, "http://192.168.1.23:81/api/projects");
+    super(http, "api/projects");
   }
 
 }
