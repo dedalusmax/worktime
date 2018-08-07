@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../shared/services/report.service'
 import { TimeIntervalService } from '../time-interval.service';
 
-<<<<<<< Updated upstream
-import { WorkRecord } from '../../shared/models/work-record';
-=======
 import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
->>>>>>> Stashed changes
 
 
 @Component({
@@ -26,12 +22,8 @@ export class DailyReportsComponent implements OnInit {
 
 
   constructor(
-<<<<<<< Updated upstream
-    private timeIntervalService: TimeIntervalService
-=======
     private timeIntervalService: TimeIntervalService,
     private reportService: ReportService 
->>>>>>> Stashed changes
   ) { }
 
   ngOnInit() {
