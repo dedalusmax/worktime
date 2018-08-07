@@ -1,0 +1,27 @@
+<p>
+  Daily work records from {{startDate | date:'dd.LL.yyyy.'}} to {{endDate | date:'dd.LL.yyyy.'}}
+  <p-button label="Download CSV" (onClick)=downloadData() icon="pi pi-download"></p-button>
+</p>
+
+<p-table [value]="workRecords">
+  <ng-template pTemplate="header">
+      <tr>
+        <th>Date</th>
+        <th>Project</th>
+        <th>Comment</th>
+        <th>Hours</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-workRecord let-rowIndex="rowIndex">
+      <tr>
+        <td *ngIf="rowGroupMetadata[rowIndex] != 0" [attr.rowspan]="rowGroupMetadata[rowIndex]">
+          <a routerLink="">
+            {{workRecord.workDate  | date:'dd.LL.yyyy.'}}
+          </a>
+        </td>
+        <td>{{workRecord.projectId}}</td>
+        <td>{{workRecord.comment}}</td>
+        <td>{{workRecord.hours}}</td>
+      </tr>
+  </ng-template>
+</p-table>
