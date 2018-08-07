@@ -2,7 +2,7 @@
 
     <div class="ui-g-12">
         <span class="ui-g-12 ui-md-3 ui-lg-3">Date:</span>
-        <p-calendar (onSelect)="setDateToday()" (onBlur)="setDateToday()" class="ui-g-12 ui-md-8 ui-lg-5" [(ngModel)]="dateToday" dateFormat="dd.mm.yy"></p-calendar>
+        <p-calendar (onSelect)="setDateToday()" (onBlur)="setDateToday()" class="ui-g-12 ui-md-8 ui-lg-5" [(ngModel)]="dateToday" dateFormat="dd.mm.yy." showIcon="true"></p-calendar>
     </div>
 
     <div class="ui-g-12">
@@ -17,14 +17,14 @@
 
     <div class="ui-g-12">
         <span class="ui-g-12 ui-md-3 ui-lg-3">Choose project:</span>
-        <p-dropdown class="ui-g-12 ui-md-3 ui-lg-3" [options]="projectsTest" [(ngModel)]="projectId " required></p-dropdown>
+        <p-dropdown class="ui-g-12 ui-md-3 ui-lg-3" [options]="projectsTest" [(ngModel)]="projectId" required placeholder="Project"></p-dropdown>
         <p-checkbox class="ui-g-12 ui-md-3 ui-lg-3" [(ngModel)]="businessTrip" label="Business Trip" ></p-checkbox>
         <p-checkbox class="ui-g-12 ui-md-3 ui-lg-3" [(ngModel)]="fieldWork" label="Field Work "></p-checkbox>
     </div>
 
     <div class="ui-g-12">
-        <span class="ui-g-12 ui-md-3 ui-lg-3">Comments:</span>
-        <input type="text" pInputText [(ngModel)]="comment" />
+        <span class="ui-g-12 ui-md-3 ui-lg-3">Comment:</span>
+        <input type="text" size="80" pInputText [(ngModel)]="comment" placeholder="Comment"/>
     </div>
 
     <div class="ui-g-12">
