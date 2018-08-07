@@ -2,6 +2,17 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@media only screen and (min-width: 750px) {
+    .container {
+        padding: 0 5em;
+    }
+}
+
 a {
     text-decoration-line: none;
     color: #1e73ce;
@@ -13,5 +24,11 @@ a {
     &:hover {
         color: #2d65a1;
         text-decoration: underline;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    .hide-sm {
+        display: none;
     }
 }

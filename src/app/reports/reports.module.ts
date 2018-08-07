@@ -8,6 +8,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 
+
 import { TimeIntervalService } from './time-interval.service';
 
 import { ReportingRoutingModule } from './reports-routing.module';
