@@ -20,8 +20,10 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit() {
     this.items = [
-      {label: 'Daily reports', routerLink: 'daily'},
-      {label: 'Projects reports', routerLink: 'projects'}
+      {label: 'Daily report', routerLink: 'daily'},
+      {label: 'Projects report', routerLink: 'projects'},
+      {label: 'Worktime report', routerLink: 'worktime'},
+      {label: 'Incomplete records', routerLink: 'incomplete'}
     ];
 
     this.timeIntervalService.endDateSource.subscribe(

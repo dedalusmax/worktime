@@ -14,6 +14,8 @@ import { ReportingRoutingModule } from './reports-routing.module';
 import { DailyReportsComponent } from './daily-reports/daily-reports.component';
 import { ProjectsReportsComponent } from './projects-reports/projects-reports.component';
 import { ReportsComponent } from './reports.component';
+import { IncompleteRecordsReportComponent } from './incomplete-records-report/incomplete-records-report.component';
+import { WorktimeReportComponent } from './worktime-report/worktime-report.component';
 
 @NgModule({
   imports: [
@@ -29,7 +31,7 @@ import { ReportsComponent } from './reports.component';
   declarations: [
     DailyReportsComponent, 
     ProjectsReportsComponent, 
-    ReportsComponent
+    ReportsComponent, IncompleteRecordsReportComponent, WorktimeReportComponent
   ],
   providers: [TimeIntervalService]
 })
