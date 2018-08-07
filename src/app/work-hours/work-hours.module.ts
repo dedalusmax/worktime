@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule, Time } from '@angular/common';
 import { WorkHoursComponent } from './work-hours.component';
 
-import { WorkHoursRoutingModule } from './work-hours-routing.module'; 
+import { WorkHoursRoutingModule } from './work-hours-routing.module';
 
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '../../../node_modules/@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { CheckboxModule } from 'primeng/checkbox';
+
+import { DateTodayService } from "./date-today.service";
 
 @NgModule({
   imports: [
@@ -14,9 +17,11 @@ import { DropdownModule } from 'primeng/dropdown';
     FormsModule,
     WorkHoursRoutingModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule, 
+    CheckboxModule
   ],
-  declarations: [WorkHoursComponent]
+  declarations: [WorkHoursComponent],
+  providers: [DateTodayService]
 })
 export class WorkHoursModule { 
 

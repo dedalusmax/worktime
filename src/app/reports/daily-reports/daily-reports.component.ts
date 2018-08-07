@@ -23,7 +23,8 @@ export class DailyReportsComponent implements OnInit {
     comment: "imam",
     fieldWork: false,
     businessTrip: false
-},{
+},
+{
     recordId: 1,
     userId: "string",
     projectId: 12,
@@ -32,7 +33,8 @@ export class DailyReportsComponent implements OnInit {
     comment: "imam",
     fieldWork: false,
     businessTrip: false
-},{
+},
+{
     recordId: 1,
     userId: "string",
     projectId: 12,
@@ -41,7 +43,8 @@ export class DailyReportsComponent implements OnInit {
     comment: "imam",
     fieldWork: false,
     businessTrip: false
-},{
+},
+{
     recordId: 1,
     userId: "string",
     projectId: 12,
@@ -50,7 +53,8 @@ export class DailyReportsComponent implements OnInit {
     comment: "imam",
     fieldWork: false,
     businessTrip: false
-},{
+},
+{
   recordId: 2,
   userId: "string",
   projectId: 13,
@@ -59,8 +63,8 @@ export class DailyReportsComponent implements OnInit {
   comment: "nemam",
   fieldWork: false,
   businessTrip: false
-}
-,{
+},
+{
   recordId: 2,
   userId: "string",
   projectId: 19,
@@ -69,8 +73,8 @@ export class DailyReportsComponent implements OnInit {
   comment: "nkdakdaskdd",
   fieldWork: false,
   businessTrip: false
-}
-,{
+},
+{
   recordId: 3,
   userId: "string",
   projectId: 13,
