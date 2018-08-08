@@ -7,6 +7,7 @@ import { WorkHoursRoutingModule } from './work-hours-routing.module';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '../../../node_modules/@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { TableModule } from 'primeng/table';
 import { CheckboxModule } from 'primeng/checkbox';
 
 import { DefaultDateService } from './default-date.service';
@@ -18,7 +19,8 @@ import { DefaultDateService } from './default-date.service';
     WorkHoursRoutingModule,
     CalendarModule,
     DropdownModule,
-    CheckboxModule
+    CheckboxModule,
+    TableModule
   ],
   declarations: [WorkHoursComponent],
   providers: [DefaultDateService]

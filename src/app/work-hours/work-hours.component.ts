@@ -4,6 +4,8 @@ import { ProjectsService } from "../shared/services/projects.service";
 import { Component, OnInit } from '@angular/core';
 
 import { DefaultDateService } from './default-date.service';
+import { WorkRecordService } from "../shared/services/work-record.service";
+import { WorkRecord } from "../shared/models/work-record";
 
 @Component({
   selector: 'work-hours',
@@ -15,11 +17,13 @@ export class WorkHoursComponent implements OnInit {
   projects: any;
   projectsTest: any;
 
+  workRecords: Array<WorkRecord>;
   dateToday: Date;
 
   constructor(
     private projectService: ProjectsService,
-    private defaultDateService: DefaultDateService
+    private defaultDateService: DefaultDateService,
+    private workRecordService: WorkRecordService
   ) { }
 
   ngOnInit() {
