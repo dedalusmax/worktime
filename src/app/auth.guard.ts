@@ -1,16 +1,18 @@
-import { CanActivate } from "../../node_modules/@angular/router";
-import { AuthService } from "./shared/services/auth.service";
-import { of } from "../../node_modules/rxjs";
+import { CanActivateChild } from "@angular/router";
+import { UserService } from "./shared/services/user.service";
+import { of } from "rxjs";
+import { Injectable } from "@angular/core";
 
-export class AuthGuard implements CanActivate{
+@Injectable()
+export class AuthGuard implements CanActivateChild{
 
-    constructor(public auth: AuthService) {}
+    constructor(public auth: UserService) {}
     
-    canActivate() {
-        if (this.auth.isLoggedIn()) {
+    canActivateChild() {
+        if (this.auth.isUserDefined()) {
             return of(true);
         }
-        return this.auth.logIn();
+        return this.auth.getUser();
     }
 
 }

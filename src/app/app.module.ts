@@ -11,6 +11,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { InMemoryDataService } from './shared/services/in-memory-data.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { AuthGuard } from './auth.guard';
+import { UserService } from './shared/services/user.service';
 
 // import { Projects } from './work-hours/projects';
 
@@ -23,14 +25,11 @@ import { ButtonModule } from 'primeng/button';
     AppRoutingModule, 
     TabMenuModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
     BrowserAnimationsModule,
     InputTextModule,
     ButtonModule
   ],
-  providers: [],
+  providers: [AuthGuard, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

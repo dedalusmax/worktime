@@ -11,7 +11,7 @@ const httpOptions = {
 
 export abstract class HttpBaseService<T>{
 
-    private url : string;
+    protected url : string;
 
     constructor(protected http: HttpClient, url: string) {
         this.url = url;
