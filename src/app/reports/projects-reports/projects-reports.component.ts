@@ -5,6 +5,28 @@ import { TimeIntervalService } from '../time-interval.service';
 import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+const COLORS = [
+  "#66c2a5",
+  "#fc8d62",
+  "#8da0cb",
+  "#e78ac3",
+  "#a6d854",
+  "#ffd92f",
+  "#e5c494",
+  "#b3b3b3"
+];
+
+const COLORS_HOVER = [
+  "#b3e2cd",
+  "#fdcdac",
+  "#cbd5e8",
+  "#f4cae4",
+  "#e6f5c9",
+  "#fff2ae",
+  "#f1e2cc",
+  "#cccccc"
+];
+
 @Component({
   selector: 'app-projects-reports',
   templateUrl: './projects-reports.component.html',
@@ -21,25 +43,9 @@ export class ProjectsReportsComponent implements OnInit {
     }
   };
 
-  chartData: any= {
-    labels: ['Projekt A','Projekt B','Projekt C'],
-    datasets: [
-      {
-        data: [48, 4, 12],
-        backgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-        ],
-        hoverBackgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-        ]
-      }
-    ]
-  };
+  colors = COLORS;
 
+  chartData: object;
   tableData: any;
   
   startDate: Date;
@@ -67,7 +73,9 @@ export class ProjectsReportsComponent implements OnInit {
         labels: data.map((d: {projectName:string})=> d.projectName),
         datasets: [
           {
-            data: data.map((d: {hours:number})=> d.hours)  
+            data: data.map((d: {hours:number})=> d.hours),
+            backgroundColor: COLORS,
+            hoverBackgroundColor: COLORS_HOVER
           }
         ]
       }

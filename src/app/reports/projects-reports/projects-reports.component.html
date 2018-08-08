@@ -1,26 +1,41 @@
 <p>
     Work projects records from {{startDate | date:'dd.LL.yyyy.'}} to {{endDate | date:'dd.LL.yyyy.'}}
-    <p-button label="Download CSV" (onClick)=downloadData() icon="pi pi-download"></p-button>
+    <p-button label="Download CSV" (click)="dt.exportCSV()" icon="pi pi-download"></p-button>
 </p>
 
 
 <p-chart class="ui-g-12 ui-lg-6" type="pie" [options]="chartOptions" [data]="chartData"></p-chart>
 
-<p-table class="ui-g-12 ui-lg-6" [value]="projectRecords">
+<p-table #dt class="ui-g-12 ui-lg-6" [autoLayout]="true" [value]="projectRecords">
     <ng-template pTemplate="header">
         <tr>
             <th></th>
             <th>Project</th>
             <th>Hours</th>
-            <th>%</th>
+            <th class="hide-sm">%</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-projectRecord>
+    <ng-template pTemplate="body" let-projectRecord let-rowIndex="rowIndex">
         <tr>
-            <td>ll</td>
+            <td>
+                <svg width="15" height="15">
+                    <rect width="15" height="15" [attr.fill]="colors.length > rowIndex ? colors[rowIndex] : 'lightgray'"/>
+                </svg>
+            </td>
             <td>{{projectRecord.projectName}}</td>
             <td>{{projectRecord.hours}}</td>
-            <td>{{projectRecord.hours / totalHours | percent}}</td>
+            <td class="hide-sm">{{projectRecord.hours / totalHours | percent}}</td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="footer">
+        <tr>
+            <td colspan="2">
+                Total hours:
+            </td>
+            <td colspan="2">
+                {{totalHours}}
+            </td>
+        </tr>
+    </ng-template>
+
 </p-table>

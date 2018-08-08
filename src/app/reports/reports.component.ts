@@ -11,7 +11,7 @@ import { TimeIntervalService } from './time-interval.service';
 })
 export class ReportsComponent implements OnInit {
 
-  items: MenuItem[] =[];
+  items: MenuItem[] = [];
 
   startDate: Date;
   endDate: Date;
@@ -40,7 +40,7 @@ export class ReportsComponent implements OnInit {
   }
 
   setStartDate() {
-    this.timeIntervalService.sendStartDate(this.startDate);   
+    this.timeIntervalService.sendStartDate(this.startDate);  
   }
 
 }
