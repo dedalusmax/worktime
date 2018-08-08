@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from '../../shared/services/report.service'
+import { ReportService } from '../../shared/services/report.service';
 import { TimeIntervalService } from '../time-interval.service';
 
 import { combineLatest } from 'rxjs';
@@ -14,13 +14,30 @@ export class IncompleteRecordsReportComponent implements OnInit {
 
   incompleteRecords: any;
 
+  headersCSV = [
+    {
+      header: 'Date',
+      field: 'workdate'
+    }
+  ];
+
+
   startDate: Date;
   endDate: Date;
 
+  exportCSVFormat({data, field}) {
+    if (field === 'workdate') {
+      const day = data.getDate();
+      const month = 1 + data.getMonth();
+      const year = data.getFullYear();
+      return `${day}.${month}.${year}.`;
+    }
+    return data;
+  }
+
   constructor(
     private timeIntervalService: TimeIntervalService,
-    private reportService: ReportService 
-  ) { }
+    private reportService: ReportService) { }
 
   ngOnInit() {
     combineLatest(
@@ -35,8 +52,5 @@ export class IncompleteRecordsReportComponent implements OnInit {
     ).subscribe(data => this.incompleteRecords = data);
   }
 
-  downloadData(): void {
-    //TODO
-  }
 
 }

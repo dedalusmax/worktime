@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 
 import { TabMenuModule } from 'primeng/tabmenu';
 import { CalendarModule } from 'primeng/calendar';
@@ -30,8 +30,8 @@ import { WorktimeReportComponent } from './worktime-report/worktime-report.compo
     ReportingRoutingModule
   ],
   declarations: [
-    DailyReportsComponent, 
-    ProjectsReportsComponent, 
+    DailyReportsComponent,
+    ProjectsReportsComponent,
     ReportsComponent, IncompleteRecordsReportComponent, WorktimeReportComponent
   ],
   providers: [TimeIntervalService]
