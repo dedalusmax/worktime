@@ -14,7 +14,7 @@ import { WorkRecord } from '../models/work-record';
 export class ReportService extends HttpBaseService<WorkTime>{
 
   constructor(http: HttpClient) {
-    super(http, "api/workTimes");
+    super(http, 'api/workTimes');
   }
 
   private workDaysUrl = 'api/workTimes';

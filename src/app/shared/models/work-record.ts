@@ -1,4 +1,4 @@
-export class WorkRecord{
+export class WorkRecord {
     recordId: number;
     userId: string;
     projectId: number;

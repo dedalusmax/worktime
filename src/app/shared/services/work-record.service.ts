@@ -8,10 +8,10 @@ import { WorkRecord } from '../models/work-record';
 @Injectable({
   providedIn: 'root'
 })
-export class WorkRecordService extends HttpBaseService<WorkRecord>{
+export class WorkRecordService extends HttpBaseService<WorkRecord> {
 
-  constructor(http: HttpClient) { 
-    super(http, "api/workRecords");
+  constructor(http: HttpClient) {
+    super(http, 'api/workRecords');
   }
-  
+
 }

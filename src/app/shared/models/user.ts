@@ -1,6 +1,5 @@
-export class User{
-    userId : string;
+export class User {
+    id: string;
     fullName: string;
-    shortName : string;
-    allowCopy: boolean;
+    username: string;
 }

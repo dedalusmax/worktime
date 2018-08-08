@@ -13,19 +13,19 @@ const httpOptions = {
 @Injectable()
 export class UserService extends HttpBaseService<User> {
 
-    userInfo: User; 
+    userInfo: User;
 
-    constructor(http: HttpClient) { super(http, "http://192.168.1.23:81/api/user"); }
+    constructor(http: HttpClient) { super(http, 'http://192.168.1.23:81/api/user'); }
 
     isUserDefined(): boolean {
         return this.userInfo != null;
     }
-    
+
     getUser(): Observable<boolean> {
         return this.http.get<User>(this.url, httpOptions).pipe(map( response => {
             this.userInfo = response;
-            return (response.userId !== undefined);
+            return (response.id !== undefined);
         }));
     }
-    
+
 }
