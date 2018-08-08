@@ -5,78 +5,6 @@ import { TimeIntervalService } from '../time-interval.service';
 import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-
-// TODO brisati
-const workRecords: any = 
-[
-  {
-    recordId: 1,
-    userId: "string",
-    projectId: 12,
-    workDate: new Date(2018,8,2,0,0,0),
-    hours: 2,
-    comment: "imam",
-    fieldWork: false,
-    businessTrip: false
-  },{
-    recordId: 1,
-    userId: "string",
-    projectId: 12,
-    workDate: new Date(2018,8,3,0,0,0),
-    hours: 2,
-    comment: "imam",
-    fieldWork: false,
-    businessTrip: false
-  },{
-    recordId: 1,
-    userId: "string",
-    projectId: 12,
-    workDate: new Date(2018,8,3,0,0,0),
-    hours: 2,
-    comment: "imam",
-    fieldWork: false,
-    businessTrip: false
-  },{
-    recordId: 1,
-    userId: "string",
-    projectId: 12,
-    workDate: new Date(2018,8,5,0,0,0),
-    hours: 2,
-    comment: "imam",
-    fieldWork: false,
-    businessTrip: false
-  },{
-    recordId: 2,
-    userId: "string",
-    projectId: 13,
-    workDate: new Date(2018,8,5,0,0,0),
-    hours: 6,
-    comment: "nemam",
-    fieldWork: false,
-    businessTrip: false
-  }
-  ,{
-    recordId: 2,
-    userId: "string",
-    projectId: 19,
-    workDate: new Date(2018,8,5,0,0,0),
-    hours: 1,
-    comment: "nkdakdaskdd",
-    fieldWork: false,
-    businessTrip: false
-  }
-  ,{
-    recordId: 3,
-    userId: "string",
-    projectId: 13,
-    workDate: new Date(2018,8,6,0,0,0),
-    hours: 8,
-    comment: "nemam",
-    fieldWork: false,
-    businessTrip: true
-  }
-];
-
 @Component({
   selector: 'app-projects-reports',
   templateUrl: './projects-reports.component.html',
@@ -84,24 +12,32 @@ const workRecords: any =
 })
 export class ProjectsReportsComponent implements OnInit {
 
-  projectRecords: any;
+  projectRecords: object[];
+  totalHours: number = 0;
 
-  chartData = {
+  chartOptions = {
+    legend: {
+      display: false
+    }
+  };
+
+  chartData: any= {
     labels: ['Projekt A','Projekt B','Projekt C'],
     datasets: [
-        {
-            data: [48, 4, 12],
-            backgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56"
-            ],
-            hoverBackgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56"
-            ]
-        }]    
+      {
+        data: [48, 4, 12],
+        backgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56"
+        ],
+        hoverBackgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56"
+        ]
+      }
+    ]
   };
 
   tableData: any;
@@ -122,14 +58,27 @@ export class ProjectsReportsComponent implements OnInit {
       switchMap(([startDate, endDate]) => {
         this.startDate = startDate;
         this.endDate = endDate;
-        return this.reportService.getWorkRecordsInPeriod(startDate, endDate);
+        return this.reportService.getWorkRecordsInPeriodByProjects(startDate, endDate);
       })
-    ).subscribe(data => this.projectRecords = data);
+    ).subscribe(data => {
+      this.projectRecords = data;
+      this.totalHours = data.reduce<number>( (sum, record:{hours:number}) => sum + record.hours, 0);
+      this.chartData = {
+        labels: data.map((d: {projectName:string})=> d.projectName),
+        datasets: [
+          {
+            data: data.map((d: {hours:number})=> d.hours)  
+          }
+        ]
+      }
+    });
   }
 
 
+
+
   downloadData(): void {
-    //TODO
+    //TODO    
   }
 
 }

@@ -3,4 +3,24 @@
     <p-button label="Download CSV" (onClick)=downloadData() icon="pi pi-download"></p-button>
 </p>
 
-<p-chart type="pie" [data]="chartData"></p-chart>
+
+<p-chart class="ui-g-12 ui-lg-6" type="pie" [options]="chartOptions" [data]="chartData"></p-chart>
+
+<p-table class="ui-g-12 ui-lg-6" [value]="projectRecords">
+    <ng-template pTemplate="header">
+        <tr>
+            <th></th>
+            <th>Project</th>
+            <th>Hours</th>
+            <th>%</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-projectRecord>
+        <tr>
+            <td>ll</td>
+            <td>{{projectRecord.projectName}}</td>
+            <td>{{projectRecord.hours}}</td>
+            <td>{{projectRecord.hours / totalHours | percent}}</td>
+        </tr>
+    </ng-template>
+</p-table>

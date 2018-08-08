@@ -31,7 +31,7 @@ export class WorktimeReportComponent implements OnInit {
       switchMap(([startDate, endDate]) => {
         this.startDate = startDate;
         this.endDate = endDate;
-        return this.reportsService.getWorkRecordsInPeriod(startDate, endDate);
+        return this.reportsService.getWorkTimeInPeriod(startDate, endDate);
       })
     ).subscribe(data => this.workTimeRecords = data);
   }
