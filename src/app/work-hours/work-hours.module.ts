@@ -9,7 +9,7 @@ import { FormsModule } from '../../../node_modules/@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 
-import { DateTodayService } from "./date-today.service";
+import { DefaultDateService } from './default-date.service';
 
 @NgModule({
   imports: [
@@ -17,13 +17,13 @@ import { DateTodayService } from "./date-today.service";
     FormsModule,
     WorkHoursRoutingModule,
     CalendarModule,
-    DropdownModule, 
+    DropdownModule,
     CheckboxModule
   ],
   declarations: [WorkHoursComponent],
-  providers: [DateTodayService]
+  providers: [DefaultDateService]
 })
-export class WorkHoursModule { 
+export class WorkHoursModule {
 
   date: Date;
 

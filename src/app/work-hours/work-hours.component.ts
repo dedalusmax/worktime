@@ -2,7 +2,8 @@ import { InMemoryDataService } from "../shared/services/in-memory-data.service";
 import { ProjectsService } from "../shared/services/projects.service";
 
 import { Component, OnInit } from '@angular/core';
-import { DateTodayService } from "./date-today.service";
+
+import { DefaultDateService } from './default-date.service';
 
 @Component({
   selector: 'work-hours',
@@ -12,13 +13,13 @@ import { DateTodayService } from "./date-today.service";
 export class WorkHoursComponent implements OnInit {
 
   projects: any;
-  projectsTest: any; 
+  projectsTest: any;
 
   dateToday: Date;
 
   constructor(
     private projectService: ProjectsService,
-    private dateTodayService: DateTodayService
+    private defaultDateService: DefaultDateService
   ) { }
 
   ngOnInit() {
@@ -29,17 +30,15 @@ export class WorkHoursComponent implements OnInit {
         this.projects.forEach(project => {
           this.projectsTest.push(
             {label : project.name, value: project.id }
-          )
+          );
         });
-      })
+      });
       console.log(this.projects);
-      this.dateTodayService.DateTodaySource.subscribe(
+      this.defaultDateService.dateTodaySource.subscribe(
         (dateToday: Date) => this.dateToday = dateToday
       );
-  }
-  
+  }  
   setDateToday() {
-    this.dateTodayService.sendDateToday(this.dateToday);   
+    this.defaultDateService.sendDateToday(this.dateToday);   
   }
-
 }
