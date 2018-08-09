@@ -9,17 +9,17 @@ const routes: Routes = [
   {
     path: 'workhours',
     loadChildren: () => WorkHoursModule,
-//    canActivateChild : [AuthGuard]
+    canActivateChild : [AuthGuard]
   },
   {
     path: 'reports',
     loadChildren: () => ReportsModule,
-//    canActivateChild : [AuthGuard]
+    canActivateChild : [AuthGuard]
   },
   {
     path: '',
-    loadChildren: () => WorkHoursModule,
-//    canActivateChild : [AuthGuard]
+    redirectTo: 'workhours',
+    pathMatch: 'full'
   }
 ];
 

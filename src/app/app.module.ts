@@ -35,8 +35,8 @@ import { UserService } from './shared/services/user.service';
       deps: [AppConfig],
       multi: true
     },
-//    UserService,
-//    AuthGuard
+    UserService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
