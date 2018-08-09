@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from '../../shared/services/report.service'
+import { ReportService } from '../../shared/services/report.service';
 import { TimeIntervalService } from '../time-interval.service';
 
 import { combineLatest } from 'rxjs';
@@ -18,8 +18,24 @@ export class WorktimeReportComponent implements OnInit {
 
   workTimeRecords: any;
 
+  headersCSV = [
+    {
+      header: 'Date',
+      field: 'workdate'
+    },
+    {
+      header: 'Start Time',
+      field: 'startTime'
+    },
+    {
+      header: 'End Time',
+      field: 'endTime'
+    }
+  ];
+
+
   constructor(
-    private timeIntervalService: TimeIntervalService, 
+    private timeIntervalService: TimeIntervalService,
     private reportsService: ReportService
   ) { }
 
@@ -36,8 +52,20 @@ export class WorktimeReportComponent implements OnInit {
     ).subscribe(data => this.workTimeRecords = data);
   }
 
-  downloadData(): void {
-    //TODO   
-  }
+  exportCSVFormat({data, field}) {
+    if (field === 'workdate') {
+      const day = data.getDate();
+      const month = 1 + data.getMonth();
+      const year = data.getFullYear();
+      return `${day}.${month}.${year}.`;
+    }
 
+    if (field === 'startTime' || field === 'endTime') {
+      const minutes = data.getMinutes();
+      const hours = data.getHours();
+      return `${hours}:${minutes}`;
+    }
+
+    return data;
+  }
 }

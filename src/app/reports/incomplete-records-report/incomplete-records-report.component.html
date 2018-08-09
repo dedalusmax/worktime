@@ -3,7 +3,7 @@
   <p-button label="Download CSV" (click)="dt.exportCSV()" icon="pi pi-download"></p-button>
 </p>
 
-<p-table #dt [value]="incompleteRecords" [columns]="headersCSV" [exportFunction]="exportCSVFormat" exportFilename="Incomplete">
+<p-table #dt [value]="incompleteRecords" [columns]="headersCSV" [exportFunction]="exportCSVFormat" exportFilename="Incomplete" >
   <ng-template pTemplate="header">
       <tr>
         <th>

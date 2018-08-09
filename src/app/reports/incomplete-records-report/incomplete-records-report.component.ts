@@ -25,15 +25,6 @@ export class IncompleteRecordsReportComponent implements OnInit {
   startDate: Date;
   endDate: Date;
 
-  exportCSVFormat({data, field}) {
-    if (field === 'workdate') {
-      const day = data.getDate();
-      const month = 1 + data.getMonth();
-      const year = data.getFullYear();
-      return `${day}.${month}.${year}.`;
-    }
-    return data;
-  }
 
   constructor(
     private timeIntervalService: TimeIntervalService,
@@ -52,5 +43,14 @@ export class IncompleteRecordsReportComponent implements OnInit {
     ).subscribe(data => this.incompleteRecords = data);
   }
 
+  exportCSVFormat({data, field}) {
+    if (field === 'workdate') {
+      const day = data.getDate();
+      const month = 1 + data.getMonth();
+      const year = data.getFullYear();
+      return `${day}.${month}.${year}.`;
+    }
+    return data;
+  }
 
 }

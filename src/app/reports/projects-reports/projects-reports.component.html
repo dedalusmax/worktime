@@ -6,7 +6,7 @@
 
 <p-chart class="ui-g-12 ui-lg-6" type="pie" [options]="chartOptions" [data]="chartData"></p-chart>
 
-<p-table #dt class="ui-g-12 ui-lg-6" [autoLayout]="true" [value]="projectRecords">
+<p-table #dt class="ui-g-12 ui-lg-6" [autoLayout]="true" [value]="projectRecords" [columns]="headersCSV" [exportFunction]="exportCSVFormat" exportFilename="Projects" csvSeparator=";">
     <ng-template pTemplate="header">
         <tr>
             <th></th>

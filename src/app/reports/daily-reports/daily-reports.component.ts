@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from '../../shared/services/report.service'
+import { ReportService } from '../../shared/services/report.service';
 import { TimeIntervalService } from '../time-interval.service';
 
 import { combineLatest } from 'rxjs';
@@ -16,14 +16,32 @@ export class DailyReportsComponent implements OnInit {
   startDate: Date = null;
   endDate: Date = null;
 
-  dailyRecords:any;
+  dailyRecords: any;
 
-  //rowGroupMetadata = [];
+  // rowGroupMetadata = [];
 
+  headersCSV = [
+    {
+      header: 'Date',
+      field: 'workdate'
+    },
+    {
+      header: 'Project',
+      field: 'projectName'
+    },
+    {
+      header: 'Hours',
+      field: 'hours'
+    },
+    {
+      header: 'Comment',
+      field: 'comment'
+    }
+  ];
 
   constructor(
     private timeIntervalService: TimeIntervalService,
-    private reportService: ReportService 
+    private reportService: ReportService
   ) { }
 
   ngOnInit() {
@@ -39,10 +57,21 @@ export class DailyReportsComponent implements OnInit {
     ).subscribe(data => this.dailyRecords = data);
   }
 
+  exportCSVFormat({data, field}) {
+    if (field === 'workdate') {
+      const day = data.getDate();
+      const month = 1 + data.getMonth();
+      const year = data.getFullYear();
+      return `${day}.${month}.${year}.`;
+    }
+
+    return data;
+  }
+
   /*
   let-rowIndex="rowIndex"
   *ngIf="rowGroupMetadata[rowIndex] != 0" [attr.rowspan]="rowGroupMetadata[rowIndex]"
-  
+
   updateRowGroupMetaData() {
     this.rowGroupMetadata = [];
     if (!this.workRecords || this.workRecords.length == 0)
@@ -64,18 +93,7 @@ export class DailyReportsComponent implements OnInit {
         }
       }
     }
-  }*/
-
-  loadWorkDays(): void {
-    if (this.startDate && this.endDate) {
-      //TODO
-      //this.updateRowGroupMetaData();
-    }
   }
-
-  downloadData(): void {
-    //TODO  
-  }
-
+  */
 }
 

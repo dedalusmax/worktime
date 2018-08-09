@@ -6,20 +6,20 @@ import { ReportsModule } from './reports/reports.module';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { 
-    path: 'workhours', 
+  {
+    path: 'workhours',
     loadChildren: () => WorkHoursModule,
-    canActivateChild : [AuthGuard]
+//    canActivateChild : [AuthGuard]
   },
-  { 
-    path: 'reports', 
+  {
+    path: 'reports',
     loadChildren: () => ReportsModule,
-    canActivateChild : [AuthGuard]
+//    canActivateChild : [AuthGuard]
   },
   {
     path: '',
     loadChildren: () => WorkHoursModule,
-    canActivateChild : [AuthGuard]
+//    canActivateChild : [AuthGuard]
   }
 ];
 

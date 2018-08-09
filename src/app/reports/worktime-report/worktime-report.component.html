@@ -1,9 +1,9 @@
 <p>
   Worktime records from {{startDate | date:'dd.LL.yyyy.'}} to {{endDate | date:'dd.LL.yyyy.'}}
-  <p-button label="Download CSV" (onClick)=downloadData() icon="pi pi-download"></p-button>
+  <p-button label="Download CSV" (onClick)="dt.exportCSV()" icon="pi pi-download"></p-button>
 </p>
 
-<p-table [value]="workTimeRecords">
+<p-table #dt [value]="workTimeRecords" [columns]="headersCSV" [exportFunction]="exportCSVFormat" exportFilename="Worktime" csvSeparator=";">
   <ng-template pTemplate="header">
       <tr>
         <th>Date</th>
