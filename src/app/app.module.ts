@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { AppConfig, AppConfigFactory } from './app.config';
+import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { AppConfig } from './app.config';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { AuthGuard } from './auth.guard';
@@ -22,6 +22,7 @@ import { UserService } from './shared/services/user.service';
     BrowserModule,
     AppRoutingModule,
     TabMenuModule,
+    MenubarModule,
     HttpClientModule,
     BrowserAnimationsModule,
     InputTextModule,
@@ -31,8 +32,8 @@ import { UserService } from './shared/services/user.service';
     AppConfig,
     {
       provide: APP_INITIALIZER,
-      useFactory: AppConfigFactory,
-      deps: [AppConfig],
+      useFactory: (appConfig: AppConfig) => () => appConfig.load(),
+      deps: [AppConfig, HttpClient],
       multi: true
     },
     UserService,

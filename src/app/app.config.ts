@@ -1,24 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Config } from './shared/config';
 
-const APP_CONFIG = {
-    name: 'The Schikterica',
-    base: 'ekobit/api'
-};
+import { HttpClient} from '@angular/common/http';
+
 
 
 @Injectable()
-export class AppConfig {
-    constructor() { }
+export class AppConfig extends Config {
 
-    name: String;
-    base: String;
-
-    init(): void {
-        Object.assign(this, APP_CONFIG);
+    constructor(private http: HttpClient) {
+        super();
     }
-}
 
-
-export function AppConfigFactory(appConfig: AppConfig) {
-    return () => appConfig.init();
+    load(): Promise<any> {
+        return this.http.get<Config>('ekoschedle.config.json')
+            .toPromise()
+            .then((config: Config) => Object.assign(this, config))
+            .catch((error) => console.error(error));
+    }
 }
