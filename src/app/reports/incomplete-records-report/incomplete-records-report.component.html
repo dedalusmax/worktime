@@ -1,23 +1,28 @@
 <p>
-  Incomplete records from {{startDate | date:'dd.LL.yyyy.'}} to {{endDate | date:'dd.LL.yyyy.'}}
-  <p-button label="Download CSV" (click)="dt.exportCSV()" icon="pi pi-download"></p-button>
+    Incomplete records from {{startDate | date:'dd.LL.yyyy.'}} to {{endDate | date:'dd.LL.yyyy.'}}
+    <p-button label="Download CSV" (click)="dt.exportCSV()" icon="pi pi-download"></p-button>
 </p>
 
-<p-table #dt [value]="incompleteRecords" [columns]="headersCSV" [exportFunction]="exportCSVFormat" exportFilename="Incomplete" >
-  <ng-template pTemplate="header">
-      <tr>
-        <th>
-            Date
-        </th>
-      </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-incompleteRecord>
-      <tr>
-        <td>
-          <a routerLink="">
-            {{incompleteRecord.workdate  | date:'dd.LL.yyyy.'}}
-          </a>
-        </td>
-      </tr>
-  </ng-template>
+<p-table 
+    #dt 
+    [value]="incompleteRecords" 
+    [columns]="headersCSV" 
+    [exportFunction]="exportCSVFormat" 
+    exportFilename="Incomplete" >
+    <ng-template pTemplate="header">
+        <tr>
+            <th>
+                Date
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-incompleteRecord>
+        <tr>
+            <td>
+                <a routerLink="">
+                {{incompleteRecord.workdate  | date:'dd.LL.yyyy.'}}
+                </a>
+            </td>
+        </tr>
+    </ng-template>
 </p-table>

@@ -9,32 +9,32 @@ import { WorktimeReportComponent } from './worktime-report/worktime-report.compo
 
 
 const routes: Routes = [
-    {
+  {
+    path: '',
+    component: ReportsComponent,
+    children: [
+      {
         path: '',
-        component: ReportsComponent,
-        children: [
-            {
-                path: '',
-                redirectTo: 'daily'
-            },
-            {
-                path: 'daily',
-                component: DailyReportsComponent,
-            },
-            {
-                path: 'projects',
-                component: ProjectsReportsComponent
-            },
-            {
-                path: 'incomplete',
-                component: IncompleteRecordsReportComponent
-            },
-            {
-                path: 'worktime',
-                component: WorktimeReportComponent
-            }
-        ]
-    }
+        redirectTo: 'daily'
+      },
+      {
+        path: 'daily',
+        component: DailyReportsComponent,
+      },
+      {
+        path: 'projects',
+        component: ProjectsReportsComponent
+      },
+      {
+        path: 'incomplete',
+        component: IncompleteRecordsReportComponent
+      },
+      {
+        path: 'worktime',
+        component: WorktimeReportComponent
+      }
+    ]
+  }
 
 ];
 

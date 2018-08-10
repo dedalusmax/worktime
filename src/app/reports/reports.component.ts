@@ -40,7 +40,7 @@ export class ReportsComponent implements OnInit {
   }
 
   setStartDate() {
-    this.timeIntervalService.sendStartDate(this.startDate);  
+    this.timeIntervalService.sendStartDate(this.startDate);
   }
 
 }

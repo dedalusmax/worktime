@@ -26,6 +26,7 @@ export class ProjectsReportsComponent implements OnInit {
   };
 
   colors = COLORS;
+  hoverColors = COLORS_HOVER;
   chartData: object;
 
   startDate: Date;
@@ -69,8 +70,8 @@ export class ProjectsReportsComponent implements OnInit {
         datasets: [
           {
             data: data.map(d => d.hours),
-            backgroundColor: COLORS,
-            hoverBackgroundColor: COLORS_HOVER
+            backgroundColor: this.colors,
+            hoverBackgroundColor: this.hoverColors
           }
         ]
       };

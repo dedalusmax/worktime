@@ -8,10 +8,9 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 
-
+import { ReportingRoutingModule } from './reports-routing.module';
 import { TimeIntervalService } from './time-interval.service';
 
-import { ReportingRoutingModule } from './reports-routing.module';
 import { DailyReportsComponent } from './daily-reports/daily-reports.component';
 import { ProjectsReportsComponent } from './projects-reports/projects-reports.component';
 import { ReportsComponent } from './reports.component';
@@ -32,7 +31,9 @@ import { WorktimeReportComponent } from './worktime-report/worktime-report.compo
   declarations: [
     DailyReportsComponent,
     ProjectsReportsComponent,
-    ReportsComponent, IncompleteRecordsReportComponent, WorktimeReportComponent
+    ReportsComponent,
+    IncompleteRecordsReportComponent,
+    WorktimeReportComponent
   ],
   providers: [TimeIntervalService]
 })

@@ -1,25 +1,31 @@
 <p>
-  Worktime records from {{startDate | date:'dd.LL.yyyy.'}} to {{endDate | date:'dd.LL.yyyy.'}}
-  <p-button label="Download CSV" (onClick)="dt.exportCSV()" icon="pi pi-download"></p-button>
+    Worktime records from {{startDate | date:'dd.LL.yyyy.'}} to {{endDate | date:'dd.LL.yyyy.'}}
+    <p-button label="Download CSV" (onClick)="dt.exportCSV()" icon="pi pi-download"></p-button>
 </p>
 
-<p-table #dt [value]="workTimeRecords" [columns]="headersCSV" [exportFunction]="exportCSVFormat" exportFilename="Worktime" csvSeparator=";">
-  <ng-template pTemplate="header">
-      <tr>
-        <th>Date</th>
-        <th>Start time</th>
-        <th>End time</th>
-      </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-workTimeRecord>
-      <tr>
-        <td>
-          <a routerLink="">
-            {{workTimeRecord.workdate  | date:'dd.LL.yyyy.'}}
-          </a>
-        </td>
-        <td>{{workTimeRecord.startTime| date:'HH:mm'}}</td>
-        <td>{{workTimeRecord.endTime| date:'HH:mm'}}</td>
-      </tr>
-  </ng-template>
+<p-table
+    #dt
+    [value]="workTimeRecords"
+    [columns]="headersCSV" 
+    [exportFunction]="exportCSVFormat" 
+    exportFilename="Worktime" 
+    csvSeparator=";">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Date</th>
+            <th>Start time</th>
+            <th>End time</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-workTimeRecord>
+        <tr>
+            <td>
+                <a routerLink="">
+                    {{workTimeRecord.workdate  | date:'dd.LL.yyyy.'}}
+                </a>
+            </td>
+            <td>{{workTimeRecord.startTime| date:'HH:mm'}}</td>
+            <td>{{workTimeRecord.endTime| date:'HH:mm'}}</td>
+        </tr>
+    </ng-template>
 </p-table>

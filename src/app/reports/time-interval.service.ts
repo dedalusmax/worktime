@@ -3,6 +3,7 @@ import { BehaviorSubject  } from 'rxjs';
 
 @Injectable()
 export class TimeIntervalService {
+
   endDateSource: BehaviorSubject <Date>;
   startDateSource: BehaviorSubject <Date>;
 

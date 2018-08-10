@@ -23,10 +23,8 @@ export class IncompleteRecordsReportComponent implements OnInit {
     }
   ];
 
-
   startDate: Date;
   endDate: Date;
-
 
   constructor(
     private timeIntervalService: TimeIntervalService,
@@ -55,5 +53,4 @@ export class IncompleteRecordsReportComponent implements OnInit {
     }
     return data;
   }
-
 }
