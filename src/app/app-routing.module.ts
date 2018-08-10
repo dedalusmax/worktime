@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { WorkHoursModule } from './work-hours/work-hours.module';
 import { ReportsModule } from './reports/reports.module';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
   {

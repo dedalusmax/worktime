@@ -5,6 +5,8 @@ import { TimeIntervalService } from '../time-interval.service';
 import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { IncompleteRecordReport } from '../../shared/models/report/incomlete-record-report';
+
 @Component({
   selector: 'app-incomplete-records-report',
   templateUrl: './incomplete-records-report.component.html',
@@ -12,7 +14,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class IncompleteRecordsReportComponent implements OnInit {
 
-  incompleteRecords: any;
+  incompleteRecords: IncompleteRecordReport[];
 
   headersCSV = [
     {
@@ -28,7 +30,8 @@ export class IncompleteRecordsReportComponent implements OnInit {
 
   constructor(
     private timeIntervalService: TimeIntervalService,
-    private reportService: ReportService) { }
+    private reportService: ReportService
+  ) { }
 
   ngOnInit() {
     combineLatest(

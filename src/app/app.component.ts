@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     this.items = [
       {label: 'Work Hours', routerLink: 'workhours'},
       {
-        label: 'Reporting',
+        label: 'Reports',
         routerLink: 'reports',
         items: [
           {label: 'Daily report', routerLink: 'reports/daily'},

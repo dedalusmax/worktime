@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-
-
-import { catchError, map, tap} from 'rxjs/operators';
+import { AppConfig } from './app.config';
+import { catchError, tap} from 'rxjs/operators';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Accept': 'application/json; charset=utf-8' }),
@@ -14,9 +13,12 @@ export abstract class HttpBaseService<T> {
 
     protected url: string;
 
-    constructor(protected http: HttpClient, url: string) {
-        this.url = url;
-     }
+    constructor(protected http: HttpClient,
+        protected config: AppConfig,
+        url: string
+    ) {
+        this.url = this.config.webAPI + url;
+    }
 
     getAll(): Observable<T[]> {
         return this.http.get<T[]>(this.url, httpOptions)

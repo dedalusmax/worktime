@@ -4,6 +4,8 @@ import { User } from '../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AppConfig } from './app.config';
+
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Accept': 'application/json; charset=utf-8' }),
@@ -15,7 +17,12 @@ export class UserService extends HttpBaseService<User> {
 
     userInfo: User;
 
-    constructor(http: HttpClient) { super(http, 'http://192.168.1.23:81/api/user'); }
+    constructor(
+        protected http: HttpClient,
+        protected config: AppConfig
+    ) {
+        super(http, config, 'user');
+    }
 
     isUserDefined(): boolean {
         return this.userInfo != null;

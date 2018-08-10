@@ -5,6 +5,7 @@ import { TimeIntervalService } from '../time-interval.service';
 import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { WorkTimeReport } from '../../shared/models/report/worktime-report';
 
 @Component({
   selector: 'app-worktime-report',
@@ -16,7 +17,7 @@ export class WorktimeReportComponent implements OnInit {
   startDate: Date;
   endDate: Date;
 
-  workTimeRecords: any;
+  workTimeRecords: WorkTimeReport[];
 
   headersCSV = [
     {

@@ -5,6 +5,8 @@ import { TimeIntervalService } from '../time-interval.service';
 import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { ProjectReport } from '../../shared/models/report/project-report';
+
 import { COLORS, COLORS_HOVER } from './COLORS';
 
 @Component({
@@ -14,7 +16,7 @@ import { COLORS, COLORS_HOVER } from './COLORS';
 })
 export class ProjectsReportsComponent implements OnInit {
 
-  projectRecords: object[];
+  projectRecords: ProjectReport[];
   totalHours = 0;
 
   chartOptions = {
@@ -37,12 +39,17 @@ export class ProjectsReportsComponent implements OnInit {
     {
       header: 'Hours',
       field: 'hours'
+    },
+    {
+      header: 'Percentage',
+      field: 'percentage'
     }
   ];
 
   constructor(
     private timeIntervalService: TimeIntervalService,
-    private reportService: ReportService) { }
+    private reportService: ReportService
+  ) { }
 
   ngOnInit() {
     combineLatest(
@@ -55,19 +62,31 @@ export class ProjectsReportsComponent implements OnInit {
         return this.reportService.getWorkRecordsInPeriodByProjects(startDate, endDate);
       })
     ).subscribe(data => {
-      this.projectRecords = data;
       this.totalHours = data.reduce<number>( (sum, record: {hours: number}) => sum + record.hours, 0);
+      this.projectRecords = data.map(record => Object.assign({}, record, {percentage: record.hours / this.totalHours}));
       this.chartData = {
-        labels: data.map((d: {projectName: string}) => d.projectName),
+        labels: data.map(d => d.projectName),
         datasets: [
           {
-            data: data.map((d: {hours: number}) => d.hours),
+            data: data.map(d => d.hours),
             backgroundColor: COLORS,
             hoverBackgroundColor: COLORS_HOVER
           }
         ]
       };
     });
+  }
+
+  exportCSVFormat({data, field}) {
+    if (field === 'percentage') {
+      return (100 * data).toFixed(2).replace('.', ',');
+    }
+
+    if (field === 'hours') {
+      return data.toFixed(2).replace('.', ',');
+    }
+
+    return data;
   }
 
 }

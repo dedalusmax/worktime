@@ -5,6 +5,7 @@ import { TimeIntervalService } from '../time-interval.service';
 import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { DailyReport } from '../../shared/models/report/daily-report';
 
 @Component({
   selector: 'app-daily-reports',
@@ -16,7 +17,7 @@ export class DailyReportsComponent implements OnInit {
   startDate: Date = null;
   endDate: Date = null;
 
-  dailyRecords: any;
+  dailyRecords: DailyReport[];
 
   // rowGroupMetadata = [];
 
@@ -63,6 +64,10 @@ export class DailyReportsComponent implements OnInit {
       const month = 1 + data.getMonth();
       const year = data.getFullYear();
       return `${day}.${month}.${year}.`;
+    }
+
+    if (field === 'hours') {
+      return data.toFixed(2).replace('.', ',');
     }
 
     return data;

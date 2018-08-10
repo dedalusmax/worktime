@@ -4,7 +4,9 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { HttpBaseService } from './http-base.service';
 import { WorkTime } from '../models/work-time';
 import { UserService } from './user.service';
-import { Observable } from '../../../../node_modules/rxjs';
+import { Observable } from 'rxjs';
+import { AppConfig } from './app.config';
+
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Accept': 'application/json; charset=utf-8' }),
@@ -16,8 +18,12 @@ const httpOptions = {
 })
 export class WorkTimeService extends HttpBaseService<WorkTime> {
 
-  constructor(http: HttpClient, private userService: UserService) {
-    super(http, 'http://192.168.1.23:81/api/workTime');
+  constructor(
+    protected http: HttpClient,
+    protected config: AppConfig,
+    private userService: UserService
+  ) {
+    super(http, config, 'workTime');
   }
 
   getWorkTime(workDate: Date): Observable<WorkTime> {

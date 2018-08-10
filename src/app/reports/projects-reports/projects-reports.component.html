@@ -24,7 +24,7 @@
             </td>
             <td>{{projectRecord.projectName}}</td>
             <td>{{projectRecord.hours}}</td>
-            <td class="hide-sm">{{projectRecord.hours / totalHours | percent}}</td>
+            <td class="hide-sm">{{projectRecord.percentage | percent}}</td>
         </tr>
     </ng-template>
     <ng-template pTemplate="footer">

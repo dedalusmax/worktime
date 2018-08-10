@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { HttpBaseService } from './http-base.service';
 import { WorkRecord } from '../models/work-record';
+import { AppConfig } from './app.config';
+
 
 
 @Injectable({
@@ -10,8 +12,11 @@ import { WorkRecord } from '../models/work-record';
 })
 export class WorkRecordService extends HttpBaseService<WorkRecord> {
 
-  constructor(http: HttpClient) {
-    super(http, 'api/workRecords');
+  constructor(
+    protected http: HttpClient,
+    protected config: AppConfig
+  ) {
+    super(http, config, 'workRecords');
   }
 
 }
