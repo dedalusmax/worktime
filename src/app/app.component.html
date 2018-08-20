@@ -1,9 +1,10 @@
-<p-menubar [model]="items">
-    <span class="user">
-        <i class="pi pi-user"></i>
-        TODO UserName
-    </span>
-</p-menubar>
+
+    <p-menubar [model]="items">
+        <span class="user">
+            <i class="pi pi-user"></i>
+            {{user.fullName}}
+        </span>
+    </p-menubar>
     
 <div class="container">
     <router-outlet></router-outlet>

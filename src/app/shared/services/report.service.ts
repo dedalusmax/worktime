@@ -1,117 +1,67 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-
-import { HttpBaseService } from './http-base.service';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { DailyReport } from '../models/report/daily-report';
 import { IncompleteRecordReport } from '../models/report/incomlete-record-report';
 import { ProjectReport } from '../models/report/project-report';
 import { WorkTimeReport } from '../models/report/worktime-report';
+import { AppConfig } from './app.config';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Accept': 'application/json; charset=utf-8' }),
+  withCredentials: true
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
 
-  constructor(http: HttpClient) {
+  constructor(private httpService: HttpClient, private config: AppConfig) {
+    this.workDaysUrl = config.webAPI + 'reports/';
   }
 
-  private workDaysUrl = 'api/workTimes';
+  private workDaysUrl;
 
-  getWorkRecordsInPeriod(startDate: Date, endDate: Date): Observable<DailyReport[]> {
-    const workRecords: DailyReport[] = [
-      {
-        workdate: new Date(2018, 8, 2, 0, 0, 0),
-        projectName: 'Ime projekta',
-        projectId: 11,
-        hours: 2.5,
-        comment: ''
-      },
-      {
-        workdate: new Date(2018, 8, 2, 0, 0, 0),
-        projectName: 'Jako dobar projekt',
-        projectId: 12,
-        hours: 5.5,
-        comment: 'nemam'
-      },
-      {
-        workdate: new Date(2018, 8, 3, 0, 0, 0),
-        projectName: 'Jako dobar projekt',
-        projectId: 12,
-        hours: 8,
-        comment: 'ovo nije komentar'
-      },
-      {
-        workdate: new Date(2018, 8, 4, 0, 0, 0),
-        projectName: 'The Projekt',
-        projectId: 13,
-        hours: 8,
-        comment: 'zasto pisem komentare'
-      }
-    ];
+  getWorkRecordsInPeriod(userId: string, fromDate: Date, toDate: Date): Observable<DailyReport[]> {
 
-    return of(workRecords);
+    const getUrl = this.workDaysUrl + 'userWorkRecordsInPeriod';
+    const params = new HttpParams().set('userId' , userId).set('fromDate', this.formatDate(fromDate))
+        .set('toDate', this.formatDate(toDate));
+    return this.httpService.get<DailyReport[]>
+        (getUrl, {headers : httpOptions.headers, withCredentials : httpOptions.withCredentials, params : params});
   }
 
-  getWorkRecordsInPeriodByProjects(fromDate: Date, toDate: Date): Observable<ProjectReport[]> {
-    const projectReports: ProjectReport[] = [
-      {
-        projectId: 11,
-        projectName: 'Ime projekta',
-        hours: 148
-      },
-      {
-        projectId: 12,
-        projectName: 'Jako dobar projekt',
-        hours: 80.5
-      },
-      {
-        projectId: 13,
-        projectName: 'The Projekt',
-        hours: 72
-      }
-    ];
+  getWorkRecordsInPeriodByProjects(userId: string, fromDate: Date, toDate: Date): Observable<ProjectReport[]> {
 
-    return of(projectReports);
+    const getUrl = this.workDaysUrl + 'projectWorkRecordsInPeriod';
+    const params = new HttpParams().set('userId' , userId).set('fromDate', this.formatDate(fromDate))
+        .set('toDate', this.formatDate(toDate));
+    return this.httpService.get<ProjectReport[]>
+        (getUrl, {headers : httpOptions.headers, withCredentials : httpOptions.withCredentials, params : params});
   }
 
-  getIncompleteDaysInPeriod(fromDate: Date, toDate: Date): Observable<IncompleteRecordReport[]> {
-    const incompleteRecords: IncompleteRecordReport[] = [
-      {
-        workdate: new Date(2018, 8, 5)
-      },
-      {
-        workdate: new Date(2018, 8, 2)
-      },
-      {
-        workdate: new Date(2018, 8, 3)
-      }
-    ];
+  getIncompleteDaysInPeriod(userId: string, fromDate: Date, toDate: Date): Observable<IncompleteRecordReport[]> {
 
-    return of(incompleteRecords);
+    const getUrl = this.workDaysUrl + 'incompleteWorkRecordsInPeriod';
+    const params = new HttpParams().set('userId' , userId).set('fromDate', this.formatDate(fromDate))
+        .set('toDate', this.formatDate(toDate));
+    return this.httpService.get<IncompleteRecordReport[]>
+        (getUrl, {headers : httpOptions.headers, withCredentials : httpOptions.withCredentials, params : params});
   }
 
-  getWorkTimeInPeriod(fromDate: Date, toDate: Date): Observable<WorkTimeReport[]> {
-    const workTimes: WorkTimeReport[] = [
-      {
-        workdate: new Date(2018, 8, 2, 0, 0, 0),
-        startTime: new Date(2018, 8, 2, 8, 0, 0),
-        endTime: new Date(2018, 8, 2, 16, 0, 0)
-      },
-      {
-        workdate: new Date(2018, 8, 3, 0, 0, 0),
-        startTime: new Date(2018, 8, 3, 8, 0, 0),
-        endTime: new Date(2018, 8, 3, 16, 0, 0)
-      },
-      {
-        workdate: new Date(2018, 8, 2, 0, 0, 0),
-        startTime: new Date(2018, 8, 2, 7, 55, 0),
-        endTime: new Date(2018, 8, 2, 15, 55, 0)
-      }
-    ];
+  getWorkTimeInPeriod(userId: string, fromDate: Date, toDate: Date): Observable<WorkTimeReport[]> {
 
-    return of(workTimes);
+    const getUrl = this.workDaysUrl + 'userWorkTimeInPeriod';
+    const params = new HttpParams().set('userId' , userId).set('fromDate', this.formatDate(fromDate))
+        .set('toDate', this.formatDate(toDate));
+    return this.httpService.get<WorkTimeReport[]>
+        (getUrl, {headers : httpOptions.headers, withCredentials : httpOptions.withCredentials, params : params});
+  }
+
+  private formatDate(date: Date): string {
+    return `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}`;
   }
 
 }

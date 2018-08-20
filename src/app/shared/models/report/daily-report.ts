@@ -1,5 +1,5 @@
 export class DailyReport {
-    workdate: Date;
+    workDate: Date;
     projectId: number;
     projectName: string;
     hours: number;

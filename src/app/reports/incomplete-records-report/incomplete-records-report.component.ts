@@ -6,6 +6,7 @@ import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { IncompleteRecordReport } from '../../shared/models/report/incomlete-record-report';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-incomplete-records-report',
@@ -28,7 +29,8 @@ export class IncompleteRecordsReportComponent implements OnInit {
 
   constructor(
     private timeIntervalService: TimeIntervalService,
-    private reportService: ReportService
+    private reportService: ReportService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class IncompleteRecordsReportComponent implements OnInit {
       switchMap(([startDate, endDate]) => {
         this.startDate = startDate;
         this.endDate = endDate;
-        return this.reportService.getIncompleteDaysInPeriod(startDate, endDate);
+        return this.reportService.getIncompleteDaysInPeriod(this.userService.userInfo.id, startDate, endDate);
       })
     ).subscribe(data => this.incompleteRecords = data);
   }

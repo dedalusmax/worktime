@@ -1,0 +1,22 @@
+<p>
+  Employe absent in next 7 days.
+</p>
+
+<p-table [value]="absentEmployes">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Employe </th>
+            <th>Reason</th>
+            <th>Start Date</th>
+            <th>End date</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-absentEmploye>
+        <tr>
+            <td>{{absentEmploye.username}}</td>
+            <td>{{absentEmploye.reason}}</td>
+            <td>{{absentEmploye.startDate | date:'dd.LL.yyyy.'}}</td>
+            <td>{{absentEmploye.endDate | date:'dd.LL.yyyy.'}}</td>
+        </tr>
+    </ng-template>
+</p-table>

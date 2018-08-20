@@ -6,6 +6,8 @@ import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { DailyReport } from '../../shared/models/report/daily-report';
+import { UserService } from '../../shared/services/user.service';
+import { User } from '../../shared/models/user';
 
 @Component({
   selector: 'app-daily-reports',
@@ -42,7 +44,8 @@ export class DailyReportsComponent implements OnInit {
 
   constructor(
     private timeIntervalService: TimeIntervalService,
-    private reportService: ReportService
+    private reportService: ReportService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -53,7 +56,7 @@ export class DailyReportsComponent implements OnInit {
       switchMap(([startDate, endDate]) => {
         this.startDate = startDate;
         this.endDate = endDate;
-        return this.reportService.getWorkRecordsInPeriod(startDate, endDate);
+        return this.reportService.getWorkRecordsInPeriod(this.userService.userInfo.id, startDate, endDate);
       })
     ).subscribe(data => {
       this.dailyRecords = data;
@@ -77,8 +80,8 @@ export class DailyReportsComponent implements OnInit {
   }
 
   recordDatesAreEqual(firstRecord: DailyReport, secondRecord: DailyReport): boolean {
-    const firstDate: Date = firstRecord.workdate;
-    const secondDate: Date = secondRecord.workdate;
+    const firstDate: Date = firstRecord.workDate;
+    const secondDate: Date = secondRecord.workDate;
 
     if (firstDate.getFullYear() !== secondDate.getFullYear()) {
       return false;

@@ -22,7 +22,7 @@ export abstract class HttpBaseService<T> {
 
     getAll(): Observable<T[]> {
         return this.http.get<T[]>(this.url, httpOptions)
-            .pipe(tap(project => console.log(project)), catchError(this.handleError<any>('get', [])));
+            .pipe(tap(project => console.log(project)), catchError(this.handleError<any>('get')));
     }
 
     getById(id: number): Observable<T> {

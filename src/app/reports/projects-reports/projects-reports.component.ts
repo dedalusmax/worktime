@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs/operators';
 import { ProjectReport } from '../../shared/models/report/project-report';
 
 import { COLORS, COLORS_HOVER } from './COLORS';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-projects-reports',
@@ -49,7 +50,8 @@ export class ProjectsReportsComponent implements OnInit {
 
   constructor(
     private timeIntervalService: TimeIntervalService,
-    private reportService: ReportService
+    private reportService: ReportService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -60,7 +62,7 @@ export class ProjectsReportsComponent implements OnInit {
       switchMap(([startDate, endDate]) => {
         this.startDate = startDate;
         this.endDate = endDate;
-        return this.reportService.getWorkRecordsInPeriodByProjects(startDate, endDate);
+        return this.reportService.getWorkRecordsInPeriodByProjects(this.userService.userInfo.id, startDate, endDate);
       })
     ).subscribe(data => {
       this.totalHours = data.reduce<number>( (sum, record: {hours: number}) => sum + record.hours, 0);
