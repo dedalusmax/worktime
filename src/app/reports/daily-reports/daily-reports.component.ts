@@ -6,6 +6,8 @@ import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { DailyReport } from '../../shared/models/report/daily-report';
+import { UserService } from '../../shared/services/user.service';
+import { User } from '../../shared/models/user';
 
 @Component({
   selector: 'app-daily-reports',
@@ -16,6 +18,7 @@ export class DailyReportsComponent implements OnInit {
 
   startDate: Date = null;
   endDate: Date = null;
+  user: User;
 
   dailyRecords: DailyReport[];
 
@@ -42,10 +45,12 @@ export class DailyReportsComponent implements OnInit {
 
   constructor(
     private timeIntervalService: TimeIntervalService,
-    private reportService: ReportService
+    private reportService: ReportService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.user = this.userService.userInfo;
     combineLatest(
       this.timeIntervalService.startDateSource,
       this.timeIntervalService.endDateSource
@@ -53,7 +58,7 @@ export class DailyReportsComponent implements OnInit {
       switchMap(([startDate, endDate]) => {
         this.startDate = startDate;
         this.endDate = endDate;
-        return this.reportService.getWorkRecordsInPeriod(startDate, endDate);
+        return this.reportService.getWorkRecordsInPeriod(this.user.id, startDate, endDate);
       })
     ).subscribe(data => this.dailyRecords = data);
   }

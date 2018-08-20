@@ -27,8 +27,12 @@ export class WorkTimeService extends HttpBaseService<WorkTime> {
   }
 
   getWorkTime(workDate: Date): Observable<WorkTime> {
-      const params = new HttpParams().set('userId' , this.userService.userInfo.id).set('workdate', workDate.toLocaleDateString());
-      return this.http.get<WorkTime>
-        (this.url, {headers : httpOptions.headers, withCredentials : httpOptions.withCredentials, params : params});
+    const params = new HttpParams().set('userId' , this.userService.userInfo.id).set('workdate', this.formatDate(workDate));
+    return this.http.get<WorkTime>
+      (this.url, {headers : httpOptions.headers, withCredentials : httpOptions.withCredentials, params : params});
+}
+
+  private formatDate(date: Date): string {
+    return `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate() + 1}`;
   }
 }

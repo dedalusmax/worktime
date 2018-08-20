@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MenuItem } from 'primeng/api';
+import { UserService } from './shared/services/user.service';
+import { User } from './shared/models/user';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,9 @@ import { MenuItem } from 'primeng/api';
 export class AppComponent implements OnInit {
 
   items: MenuItem[];
+  user: User;
+
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.items = [
@@ -25,5 +30,7 @@ export class AppComponent implements OnInit {
         ]
       }
     ];
+
+   this.user = {fullName: 'Marko Posavec', id: '22', username: 'mp'};
   }
 }
