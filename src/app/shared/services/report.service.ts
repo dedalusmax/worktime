@@ -26,37 +26,29 @@ export class ReportService {
 
   getWorkRecordsInPeriod(userId: string, fromDate: Date, toDate: Date): Observable<DailyReport[]> {
 
-    const getUrl = this.workDaysUrl + 'userWorkRecordsInPeriod';
-    const params = new HttpParams().set('userId' , userId).set('fromDate', this.formatDate(fromDate))
-        .set('toDate', this.formatDate(toDate));
-    return this.httpService.get<DailyReport[]>
-        (getUrl, {headers : httpOptions.headers, withCredentials : httpOptions.withCredentials, params : params});
+    return this.getReports<DailyReport>(userId, fromDate, toDate, 'userWorkRecordsInPeriod');
   }
 
   getWorkRecordsInPeriodByProjects(userId: string, fromDate: Date, toDate: Date): Observable<ProjectReport[]> {
 
-    const getUrl = this.workDaysUrl + 'projectWorkRecordsInPeriod';
-    const params = new HttpParams().set('userId' , userId).set('fromDate', this.formatDate(fromDate))
-        .set('toDate', this.formatDate(toDate));
-    return this.httpService.get<ProjectReport[]>
-        (getUrl, {headers : httpOptions.headers, withCredentials : httpOptions.withCredentials, params : params});
+    return this.getReports<ProjectReport>(userId, fromDate, toDate, 'projectWorkRecordsInPeriod');
   }
 
   getIncompleteDaysInPeriod(userId: string, fromDate: Date, toDate: Date): Observable<IncompleteRecordReport[]> {
 
-    const getUrl = this.workDaysUrl + 'incompleteWorkRecordsInPeriod';
-    const params = new HttpParams().set('userId' , userId).set('fromDate', this.formatDate(fromDate))
-        .set('toDate', this.formatDate(toDate));
-    return this.httpService.get<IncompleteRecordReport[]>
-        (getUrl, {headers : httpOptions.headers, withCredentials : httpOptions.withCredentials, params : params});
+    return this.getReports<IncompleteRecordReport>(userId, fromDate, toDate, 'incompleteWorkRecordsInPeriod');
   }
 
   getWorkTimeInPeriod(userId: string, fromDate: Date, toDate: Date): Observable<WorkTimeReport[]> {
 
-    const getUrl = this.workDaysUrl + 'userWorkTimeInPeriod';
+    return this.getReports<WorkTimeReport>(userId, fromDate, toDate, 'userWorkTimeInPeriod');
+  }
+
+  getReports<T>(userId: string, fromDate: Date, toDate: Date, apiUrl: string): Observable<T[]> {
+    const getUrl = this.workDaysUrl + apiUrl;
     const params = new HttpParams().set('userId' , userId).set('fromDate', this.formatDate(fromDate))
         .set('toDate', this.formatDate(toDate));
-    return this.httpService.get<WorkTimeReport[]>
+    return this.httpService.get<T[]>
         (getUrl, {headers : httpOptions.headers, withCredentials : httpOptions.withCredentials, params : params});
   }
 
