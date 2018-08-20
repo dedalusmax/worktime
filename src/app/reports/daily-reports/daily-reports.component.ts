@@ -7,7 +7,6 @@ import { switchMap } from 'rxjs/operators';
 
 import { DailyReport } from '../../shared/models/report/daily-report';
 import { UserService } from '../../shared/services/user.service';
-import { User } from '../../shared/models/user';
 
 @Component({
   selector: 'app-daily-reports',
