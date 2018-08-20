@@ -6,6 +6,7 @@ import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { WorkTimeReport } from '../../shared/models/report/worktime-report';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-worktime-report',
@@ -37,7 +38,8 @@ export class WorktimeReportComponent implements OnInit {
 
   constructor(
     private timeIntervalService: TimeIntervalService,
-    private reportsService: ReportService
+    private reportsService: ReportService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -48,7 +50,7 @@ export class WorktimeReportComponent implements OnInit {
       switchMap(([startDate, endDate]) => {
         this.startDate = startDate;
         this.endDate = endDate;
-        return this.reportsService.getWorkTimeInPeriod(startDate, endDate);
+        return this.reportsService.getWorkTimeInPeriod(this.userService.userInfo.id, startDate, endDate);
       })
     ).subscribe(data => this.workTimeRecords = data);
   }

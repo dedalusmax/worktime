@@ -6,6 +6,7 @@ import { DailyReport } from '../models/report/daily-report';
 import { IncompleteRecordReport } from '../models/report/incomlete-record-report';
 import { ProjectReport } from '../models/report/project-report';
 import { WorkTimeReport } from '../models/report/worktime-report';
+import { AppConfig } from './app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Accept': 'application/json; charset=utf-8' }),
@@ -17,9 +18,11 @@ const httpOptions = {
 })
 export class ReportService {
 
-  constructor(private httpService: HttpClient) {}
+  constructor(private httpService: HttpClient, private config: AppConfig) {
+    this.workDaysUrl = config.webAPI + 'reports/';
+  }
 
-  private workDaysUrl = 'api/reports/';
+  private workDaysUrl;
 
   getWorkRecordsInPeriod(userId: string, fromDate: Date, toDate: Date): Observable<DailyReport[]> {
 
@@ -58,7 +61,7 @@ export class ReportService {
   }
 
   private formatDate(date: Date): string {
-    return `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate() + 1}`;
+    return `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}`;
   }
 
 }
