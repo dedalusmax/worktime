@@ -12,9 +12,9 @@
         <th class="hide-sm">Comment</th>
       </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-dailyRecord>
+  <ng-template pTemplate="body" let-dailyRecord let-rowIndex="rowIndex">
       <tr>
-        <td>
+        <td *ngIf="rowGroupingMetadata[rowIndex] != 0" [attr.rowspan]="rowGroupingMetadata[rowIndex]">
           <a routerLink="">
             {{dailyRecord.workdate  | date:'dd.LL.yyyy.'}}
           </a>
